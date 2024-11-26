@@ -1,20 +1,17 @@
 version: 2.1
-jobs:
-  runner-test:
-    machine: true  # Specify if you're using the machine executor
-    resource_class: large  # Choose a valid resource class, e.g., 'large'
-    steps:
-      - run:
-          name: Echo a message
-          command: echo "Hi I'm on Runners!"
-      - run:
-          name: Create directory at /var/www/html/circleci
-          command: |
-            sudo mkdir -p /var/www/html/circleci  # Create the directory
-            sudo chown $USER:$USER /var/www/html/circleci  # Ensure the current user has permission to the directory
 
 workflows:
-  version: 2
   testing:
     jobs:
       - runner-test
+
+jobs:
+  runner-test:
+    machine: true  # Use the machine executor for self-hosted runner
+    resource_class: testing-namespace/resource_label  # Your custom resource class
+    steps:
+      - run:
+          name: Create directory on the server
+          command: |
+            echo "Creating directory on the self-hosted runner"
+            sudo mkdir -p /var/www/html/circleci  # Ensure the directory is created with proper permissions
