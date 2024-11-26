@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Pull and Run Nginx Docker Image
           command: |
-            docker pull nginx:latest
+            sudo docker pull nginx:latest
 
 workflows:
   version: 2
