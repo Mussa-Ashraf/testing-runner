@@ -13,3 +13,9 @@ jobs:
           name: Pull and Run Nginx Docker Image
           command: |
             docker pull nginx:latest
+
+workflows:
+  version: 2
+  testing:
+    jobs:
+      - runner-test
