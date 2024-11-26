@@ -8,13 +8,8 @@ jobs:
           name: Add CircleCI User to Docker Group
           command: |
             sudo usermod -aG docker $USER
-            newgrp docker  # Start a new shell with the updated group
+            sudo systemctl restart docker  # Restart Docker to apply group changes
       - run:
-          name: Pull Nginx Docker Image
+          name: Pull and Run Nginx Docker Image
           command: |
             docker pull nginx:latest
-workflows:
-  version: 2
-  testing:
-    jobs:
-      - runner-test
