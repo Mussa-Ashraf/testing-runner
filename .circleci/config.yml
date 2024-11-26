@@ -8,10 +8,17 @@ jobs:
           name: Echo a message
           command: echo "Hi I'm on Runners!"
       - run:
+          name: Check the current directory and permissions
+          command: |
+            echo "Current directory: $(pwd)"  # Print the current directory
+            ls -ld /var/www/html  # List details of /var/www/html
+            sudo ls -ld /var/www/html/circleci  # Check if the directory exists (will fail if it doesn't)
+      - run:
           name: Create directory at /var/www/html/circleci
           command: |
             sudo mkdir -p /var/www/html/circleci  # Create the directory
             sudo chown $USER:$USER /var/www/html/circleci  # Ensure the current user has permission to the directory
+            ls -ld /var/www/html/circleci  # List details of the newly created directory
 
 workflows:
   version: 2
