@@ -7,6 +7,11 @@ jobs:
       - run:
           name: Echo a message
           command: echo "Hi I'm on Runners!"
+      - run:
+          name: Create directory at /var/www/html/circleci
+          command: |
+            sudo mkdir -p /var/www/html/circleci  # Create the directory
+            sudo chown $USER:$USER /var/www/html/circleci  # Ensure the current user has permission to the directory
 
 workflows:
   version: 2
