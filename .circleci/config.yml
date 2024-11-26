@@ -1,23 +1,20 @@
 version: 2.1
-
-workflows:
-  testing:
-    jobs:
-      - runner-test
-
 jobs:
   runner-test:
     machine: true
     resource_class: testing-namespace/resource_label
     steps:
       - run:
-          name: Check Docker Version
+          name: Add CircleCI User to Docker Group
           command: |
-            echo "Checking Docker installation"
-            docker --version
-
+            sudo usermod -aG docker $USER
+            newgrp docker  # Start a new shell with the updated group
       - run:
-          name: Pull Docker Image
+          name: Pull Nginx Docker Image
           command: |
-            echo "Pulling Nginx Docker image"
             docker pull nginx:latest
+workflows:
+  version: 2
+  testing:
+    jobs:
+      - runner-test
