@@ -1,15 +1,15 @@
 version: 2.1
+jobs:
+  runner-test:
+    machine: true  # Specify if you're using the machine executor
+    resource_class: large  # Choose a valid resource class, e.g., 'large'
+    steps:
+      - run:
+          name: Echo a message
+          command: echo "Hi I'm on Runners!"
 
 workflows:
+  version: 2
   testing:
     jobs:
       - runner-test
-
-jobs:
-  runner-test:
-    executor:
-      name: testing-namespace/resource_label  # Replace with your runner's namespace and resource class
-    steps:
-      - run:
-          name: Create Directory
-          command: mkdir -p /var/www/html/runner-work
