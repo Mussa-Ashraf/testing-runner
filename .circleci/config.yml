@@ -1,0 +1,15 @@
+version: 2.1
+
+workflows:
+  testing:
+    jobs:
+      - runner-test
+
+jobs:
+  runner-test:
+    executor:
+      name: testing-namespace/resource_label  # Replace with your runner's namespace and resource class
+    steps:
+      - run:
+          name: Create Directory
+          command: mkdir -p /var/www/html/runner-work
