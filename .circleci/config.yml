@@ -21,4 +21,3 @@ jobs:
           command: |
             echo "Pulling Nginx Docker image"
             docker pull nginx:latest
-
